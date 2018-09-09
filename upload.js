@@ -134,10 +134,11 @@ class Upload {
             "Accept": "application/json",
           },
           body: fd,
-        }).then(r => resolve(r.json())).catch(r => reject(r.json()))
+        }).then(async r => r.status==200 ? resolve(await r.json()): reject(await r.text())).catch(r => reject(r.text()))
       }
 
     });
   }
 }
-const { global_var } = { global_var: 'abcdef' }
+
+export default Upload;

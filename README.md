@@ -1,5 +1,6 @@
 # upload-chunk
 
+    import Upload from './upload.js'
     var tmpBlob = new File(['hello'], 'a.png', {type:'image/png'});
 
     filename = 'test.png'

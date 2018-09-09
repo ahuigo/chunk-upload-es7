@@ -1,14 +1,17 @@
 <script src="https://cdn.bootcss.com/spark-md5/3.0.0/spark-md5.min.js"></script>
-<script src="upload.js"></script>
 <input type="file" name="a.txt"/>
-<script>
-    log = console.log
+<script type="module">
+    import Upload from './upload.js';
+    let log = console.log;
 //document.addEventListener
     document.querySelector('input').addEventListener('change', (e)=>{
         if(e.target.files.length){
             let up = new Upload(e.target.files[0])
         }
     });
-    let up = new Upload(new File(['a'], 'a.txt'))
 
+    let tmpBlob = new File(['hello'], 'a.png', {type:'image/png'}),
+        filename = 'test.png',
+        chunkSize = 1024*1024; //1M
+    new Upload('/api/clipboard/uploadFile', tmpBlob, filename, chunkSize).success(d=>console.info(d)).fail(d=>console.error(d));
 </script>
